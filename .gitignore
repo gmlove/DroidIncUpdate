@@ -2,6 +2,7 @@
 **/.DS_Store
 **/*.pyc
 server/src/node_modules
+server/src/logs
 client/tmp
 client/incupdatedata
 client/droid-inc-update/.settings

@@ -39,4 +39,4 @@ exp.incupdateDataDir = path.join(__dirname, '../../client/incupdatedata')
 exp.diffDir = 'incupdate';
 exp.updateFileName = 'update.zip';
 exp.updateLimitFileName = 'updatelimit.json';
-exp.notSupportedUpdateFile = path.join(exp.incupdateDataDir, 'not-supported-update.zip');
+exp.notSupportedUpdateFile = path.join(__dirname, 'not-supported-update.zip');
