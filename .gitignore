@@ -1,0 +1,17 @@
+.DS_Store
+**/.DS_Store
+**/*.pyc
+server/src/node_modules
+client/tmp
+client/incupdatedata
+client/droid-inc-update/.settings
+client/droid-inc-update/bin/*
+client/droid-inc-update/gen/*
+client/droid-inc-update/libs/*
+client/droid-inc-update/obj/*
+client/droid-inc-update-demo/.settings
+client/droid-inc-update-demo/bin/*
+client/droid-inc-update-demo/gen/*
+client/droid-inc-update-demo/libs/*
+client/droid-inc-update-demo/obj/*
+client/droid-inc-update-demo/assets/incupdatelibs/*
