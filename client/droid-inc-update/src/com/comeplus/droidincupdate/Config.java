@@ -111,6 +111,16 @@ public class Config {
         return assetUpdateInfo.opt(key);
     }
 
+    public static long getAssetsLibSize() {
+        Object size = getFromAssetUpdateInfo("libs_size");
+        return size != null ? (Integer) size : 0;
+    }
+
+    public static long getAssetsResSize() {
+        Object size = getFromAssetUpdateInfo("res_size");
+        return size != null ? (Integer) size : 0;
+    }
+
     static boolean isExtracted() {
         Object assetVersion = getFromUpdateInfo("asset_version");
         Object versionInAsset = getFromAssetUpdateInfo("version");

@@ -49,9 +49,9 @@ public class UpdateManager {
     }
 
     public boolean isSpaceEnough() throws IOException {
-        long assetsResLength = FileUtils.duAssetsDir(this.context, Config.INCUPDATE_RES_DIR_FROM_ASSETS);
+        long assetsResLength = Config.getAssetsResSize();
         long availResSpace = FileUtils.availableSpace(Config.getIncUpdateResDir());
-        long assetsLibsLength = FileUtils.duAssetsDir(this.context, Config.INCUPDATE_LIBS_DIR_FROM_ASSETS);
+        long assetsLibsLength = Config.getAssetsLibSize();
         long availLibsSpace = FileUtils.availableSpace(Config.getIncUpdateLibsDir());
         if (assetsResLength * Config.minAvailSpaceRatio > availResSpace
                 || assetsLibsLength * Config.minAvailSpaceRatio > availLibsSpace) {
