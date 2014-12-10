@@ -16,3 +16,12 @@ client/droid-inc-update-demo/gen/*
 client/droid-inc-update-demo/libs/*
 client/droid-inc-update-demo/obj/*
 client/droid-inc-update-demo/assets/incupdatelibs/*
+client/droid-inc-update-demo-cocos/proj.android/.settings
+client/droid-inc-update-demo-cocos/proj.android/bin/*
+client/droid-inc-update-demo-cocos/proj.android/gen/*
+client/droid-inc-update-demo-cocos/proj.android/libs/*
+client/droid-inc-update-demo-cocos/proj.android/obj/*
+client/droid-inc-update-demo-cocos/proj.android/assets/incupdatelibs/*
+client/droid-inc-update-demo-cocos/proj.ios/RebornBird.xcodeproj/xcuserdata/*
+client/droid-inc-update-demo-cocos/proj.ios/RebornBird.xcodeproj/project.xcworkspace/xcuserdata/*
+client/droid-inc-update-demo-cocos/proj.android/libcocos2dcpp.so

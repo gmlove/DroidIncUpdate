@@ -10,11 +10,12 @@ import java.net.URL;
 import android.util.Log;
 
 import com.comeplus.droidincupdate.Config;
+import com.comeplus.droidincupdate.DownloadException;
 import com.comeplus.droidincupdate.ProgressListener;
 
 public class NetUtils {
 
-    public static void downloadFile(String urlStr, String filePathToWrite, ProgressListener lis) throws IOException {
+    public static void downloadFile(String urlStr, String filePathToWrite, ProgressListener lis) throws DownloadException {
         if(Config.DEBUG) {
             Log.d(Config.LOG_TAG, String.format("downloadFile: %s to %s", urlStr, filePathToWrite));
         }
@@ -53,6 +54,8 @@ public class NetUtils {
                     lis.onDownloadProgress(fileLength, total);
                 output.write(data, 0, count);
             }
+        } catch (IOException e) {
+            throw new DownloadException(e);
         } finally {
             IOUtils.closeQuietly(output);
             IOUtils.closeQuietly(input);

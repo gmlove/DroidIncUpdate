@@ -6,8 +6,9 @@ var logger = require('../logger').getLogger('incupdate', __filename);
 var promiseUtil = require('../utils/promiseUtil');
 
 
-function IncUpdateVersion (dirname) {
+function IncUpdateVersion (dirname, pn) {
     this.dirname = dirname;
+    this.pn = pn;
     this.achieveTime = null;
     this.version = null;
     this.supportedVersions = null;
@@ -40,7 +41,7 @@ proto._parseDirname = function (dirname) {
 proto.getSupportedVersions = function () {
     var self = this;
     this.supportedVersions = [];
-    var diffDir = path.join(config.incupdateDataDir, this.dirname, config.diffDir);
+    var diffDir = path.join(config.incupdateDataDir, this.pn, this.dirname, config.diffDir);
     return Promise.denodeify(fs.readdir)(diffDir).then(function (files) {
         files.forEach(function (dirname) {
             if(IncUpdateVersion.isIncUpdateVersion(dirname)) {
@@ -73,7 +74,7 @@ var hashCode = function(str) {
 
 proto.isVersionSupported = function (query) {
     var self = this;
-    var updateLimitFile = path.join(config.incupdateDataDir, this.dirname, config.updateLimitFileName);
+    var updateLimitFile = path.join(config.incupdateDataDir, this.pn, this.dirname, config.updateLimitFileName);
     return promiseUtil.fs_exists(updateLimitFile).then(function(exists){
         if(exists) {
             return Promise.denodeify(fs.readFile)(updateLimitFile);
@@ -118,6 +119,6 @@ proto.isVersionSupported = function (query) {
 }
 
 proto.getUpdateFilePath = function (dirname) {
-    return path.join(config.incupdateDataDir, this.dirname, config.diffDir, dirname, config.updateFileName);
+    return path.join(config.incupdateDataDir, this.pn, this.dirname, config.diffDir, dirname, config.updateFileName);
 }
 

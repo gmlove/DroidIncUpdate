@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.comeplus.droidincupdate.Config;
+import com.comeplus.droidincupdate.DownloadException;
 import com.comeplus.droidincupdate.NotSupportedVersionException;
 import com.comeplus.droidincupdate.UpdateManager;
 import com.comeplus.droidincupdate.UpdateProgressListener;
@@ -147,7 +148,9 @@ public class MainActivity extends Activity
 				
 				} catch (IOException e) {
 					Log.e("demo", "io error: ", e);
-				} catch (JSONException e) {
+				} catch (DownloadException e) {
+                    Log.e("demo", "download failed: ", e);
+                } catch (JSONException e) {
                     Log.e("demo", "json parse error when duAssetsDir: ", e);
                 } catch (NotSupportedVersionException e) {
                     Log.e("demo", "not supported version to update: ", e);

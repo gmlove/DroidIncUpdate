@@ -35,7 +35,7 @@ public class UpdateManager {
         this.progressListener = new ProgressListener(progressListener);
     }
 
-    public void update() throws IOException, JSONException, NotSupportedVersionException {
+    public void update() throws IOException, JSONException, NotSupportedVersionException, DownloadException {
         if (Config.FORCE_EXTRACT) {
             Log.d(Config.LOG_TAG, "force extract.");
             this.extractRes();
@@ -45,6 +45,7 @@ public class UpdateManager {
             Log.d(Config.LOG_TAG, "files already extracted.");
         }
         progressListener.onExtractEnd();
+        this.clearTmpDir();
         this.doUpdate();
     }
 
@@ -78,10 +79,11 @@ public class UpdateManager {
         Log.d(Config.LOG_TAG, "extractRes end.");
     }
 
-    public void doUpdate() throws IOException, JSONException, NotSupportedVersionException {
+    public void doUpdate() throws IOException, JSONException, NotSupportedVersionException, DownloadException {
         FileUtils.ensureDir(Config.getIncUpdateTmpDirPath());
         String zipFilePath = Config.getIncUpdateTmpDirPath() + File.separator + "update.zip";
-        NetUtils.downloadFile(Config.UPDATE_URL + "?version=" + Config.getResVersion() + "&" + SystemInfo.asUrlParam(context),
+        NetUtils.downloadFile(Config.UPDATE_URL + "?version=" + Config.getResVersion() + "&pn="
+                    + Config.PACKAGE_NAME + "&" + SystemInfo.asUrlParam(context),
                 zipFilePath, this.progressListener);
         progressListener.onDownloadEnd();
         ZipFile zipFile = null;

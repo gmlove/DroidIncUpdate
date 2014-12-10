@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D939FD5E-09D7-4EA0-AEDE-B0570F145680</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RebornBird</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A341F05FF98807E5FD3B7B45E3469D16AE199AB8</key>
+		<string>ssh://code.comeplus.net:29418/DroidIncUpdate</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>client/droid-inc-update-demo-cocos/proj.ios/RebornBird.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A341F05FF98807E5FD3B7B45E3469D16AE199AB8</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://code.comeplus.net:29418/DroidIncUpdate</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A341F05FF98807E5FD3B7B45E3469D16AE199AB8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A341F05FF98807E5FD3B7B45E3469D16AE199AB8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DroidIncUpdate</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -12,8 +12,9 @@ import re
 import subprocess
 import ConfigParser as cparser
 from os import path
+import env
 from env import BASE_DIR, LIBS_DIR, RES_DIR, INC_UPDATE_FILE_PATH, \
-scanFileList, genFileMD5, write2File, Log, INCUPDATE_DATA_DIR, BACKUP_DIR, \
+scanFileList, genFileMD5, write2File, Log, BACKUP_DIR, \
 BACKUP_LIBS_DIR, BACKUP_RES_DIR, DIFF_DIR, DIFF_UPDATE_DIR, PATCH_FILE_MIN_SIZE, \
 PATCH_FILE_MAX_SIZE_RATIO, DIFF_RESULT_FILE, FILE_VERSIONS_FILE_PATH, UPDATE_LIMIT_FILE
 
@@ -85,13 +86,13 @@ def parse_limit(limitargs):
 
 
 def find_path(proj_path, version):
-    dirs = os.listdir(os.path.join(proj_path, INCUPDATE_DATA_DIR))
+    dirs = os.listdir(os.path.join(proj_path, env.INCUPDATE_DATA_DIR))
     from zip_update import isbackupdir
     all_dirs = [d for d in dirs \
-        if os.path.isdir(os.path.join(proj_path, INCUPDATE_DATA_DIR, d)) \
+        if os.path.isdir(os.path.join(proj_path, env.INCUPDATE_DATA_DIR, d)) \
             and isbackupdir(d)]
     targetdir = filter(lambda d: d.endswith('-' + version), all_dirs)
-    return os.path.join(proj_path, INCUPDATE_DATA_DIR, targetdir[0]) if len(targetdir) else None
+    return os.path.join(proj_path, env.INCUPDATE_DATA_DIR, targetdir[0]) if len(targetdir) else None
 
 
 def update_limit(proj_path, version, limitargs):
@@ -109,6 +110,8 @@ if __name__ == '__main__':
         help()
         sys.exit(1)
     proj_path = sys.argv[1]
+    package_name = getPackageName(proj_path)
+    env.INCUPDATE_DATA_DIR = os.path.join(env.INCUPDATE_DATA_DIR, package_name)
     version = sys.argv[2]
     update_limit(proj_path, version, sys.argv[3:])
 

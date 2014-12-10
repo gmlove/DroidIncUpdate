@@ -35,7 +35,7 @@ public class IOUtils {
             }
             if(progressListener != null) {
                 piped += len;
-                progressListener.onPipe(piped);
+                //progressListener.onPipe(piped);
             }
         }
     }

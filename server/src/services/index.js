@@ -9,16 +9,23 @@ var zlib = require('zlib');
 var mkdirp = require('mkdirp');
 var Promise = require('promise');
 var IncUpdateVersion = require('../models/IncUpdateVersion');
+var promiseUtil = require('../utils/promiseUtil');
 
 router.get('/update', function (req, res) {
     logger.info('update download: query=%j', req.query);
     var version = req.query.version;
+    var pn = req.query.pn;
+    if(!version || !pn) {
+        logger.error('update download failed: version=%s, pn=', version, pn);
+        return res.sendStatus(500);
+    }
     var incUpdateVersions = [];
     var newestVersion = null;
-    Promise.denodeify(fs.readdir)(config.incupdateDataDir).then(function (files) {
+    var appIncupdateDataDir = path.join(config.incupdateDataDir, pn);
+    Promise.denodeify(fs.readdir)(appIncupdateDataDir).then(function (files) {
         files.forEach(function (dirname) {
             if(IncUpdateVersion.isIncUpdateVersion(dirname)){
-                incUpdateVersions.push(new IncUpdateVersion(dirname));
+                incUpdateVersions.push(new IncUpdateVersion(dirname, pn));
             }
         });
         incUpdateVersions.sort(function (v1, v2) {
@@ -29,8 +36,8 @@ router.get('/update', function (req, res) {
         }
 
         function findUpdateVersion(incUpdateVersions, index) {
-            logger.debug('findUpdateVersion: incUpdateVersions.length=%s, index=%s, ver=%s',
-                incUpdateVersions.length, index, version);
+            logger.debug('findUpdateVersion: incUpdateVersions.length=%s, index=%s, pn=%s, ver=%s',
+                incUpdateVersions.length, index, pn, version);
             if(index < 0) {
                 return Promise.resolve(false);
             }

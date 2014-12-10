@@ -4,6 +4,7 @@ import hashlib
 import json
 import pdb
 import zipfile
+from xml.dom import minidom
 
 
 BASE_DIR = 'assets'
@@ -12,7 +13,7 @@ RES_DIR = path.join(BASE_DIR, 'res')
 INC_UPDATE_FILE_PATH = path.join(BASE_DIR, 'incupdate.conf')
 FILE_VERSIONS_FILE_PATH = path.join(BASE_DIR, 'files.conf')
 
-INCUPDATE_DATA_DIR = '../incupdatedata'
+INCUPDATE_DATA_DIR = '../../incupdatedata'
 BACKUP_DIR = 'backup'
 # ../incupdatedata/backup/incupdatelibs
 BACKUP_LIBS_DIR = 'incupdatelibs'
@@ -67,6 +68,11 @@ def write2File(filePath, obj):
     f.write(json.dumps(obj, indent=4))
     f.close()
     print 'Write file OK[%s]!' % (filePath)
+
+
+def getPackageName(projdir):
+    xmldoc = minidom.parse(os.path.join(projdir, 'AndroidManifest.xml'))
+    return xmldoc.getElementsByTagName('manifest')[0].attributes['package'].value
 
 
 

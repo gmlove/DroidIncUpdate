@@ -15,6 +15,7 @@ import android.util.Log;
 
 public class Config {
     public static String LOG_TAG = "DroidIncUpdate";
+    public static String PACKAGE_NAME = null;
     public static boolean DEBUG = true;
     public static boolean FORCE_EXTRACT = false;
 
@@ -49,6 +50,7 @@ public class Config {
         InputStream is = null;
         try {
             is = context.getAssets().open(INCUPDATE_CONFIG_FILE_FROM_ASSETS);
+            PACKAGE_NAME = context.getPackageName();
             assetUpdateInfoRaw = FileUtils.readStreamAsString(is);
             if(DEBUG) {
                 Log.d(LOG_TAG, "assetUpdateInfoRaw: " + assetUpdateInfoRaw);
@@ -175,4 +177,9 @@ public class Config {
         }
         FileUtils.writeStringToFile(getIncUpdateUpdateInfoFilePath(), updateInfo.toString());
     }
+    
+    
+    public static native int load(String libpath);
+    
+    public static native int unload(String libpath);
 }

@@ -147,7 +147,7 @@ public class FileUtils {
                         lis = new FileProgressListener() {
                             @Override
                             public void onWrite(long len) {
-                                progressListener.onExtractProgress(spath, fileLen, len);
+                                //progressListener.onExtractProgress(spath, fileLen, len);
                             }
                         };
                     }

@@ -12,10 +12,11 @@ import re
 import subprocess
 import ConfigParser as cparser
 from os import path
+import env
 from env import BASE_DIR, LIBS_DIR, RES_DIR,INC_UPDATE_FILE_PATH, \
-scanFileList, genFileMD5, write2File, Log, INCUPDATE_DATA_DIR, BACKUP_DIR, \
+scanFileList, genFileMD5, write2File, Log, BACKUP_DIR, \
 BACKUP_LIBS_DIR, BACKUP_RES_DIR, DIFF_DIR, DIFF_UPDATE_DIR, PATCH_FILE_MIN_SIZE, \
-PATCH_FILE_MAX_SIZE_RATIO, DIFF_RESULT_FILE, FILE_VERSIONS_FILE_PATH
+PATCH_FILE_MAX_SIZE_RATIO, DIFF_RESULT_FILE, FILE_VERSIONS_FILE_PATH, getPackageName
 from update_limit import limit_templ, supported_limit_keys, parse_limit, update_limit, find_path
 
 '''
@@ -34,7 +35,7 @@ def isbackupdir(dirname):
 def backup(version):
     Log.info('backup resource files start.')
     dirname = datetime.datetime.now().strftime('%Y%m%d%H%M%S') + '-' + version;
-    target_dir = os.path.join(proj_path, INCUPDATE_DATA_DIR, dirname)
+    target_dir = os.path.join(proj_path, env.INCUPDATE_DATA_DIR, dirname)
     shutil.copytree(path.join(proj_path, LIBS_DIR),
         path.join(target_dir, BACKUP_DIR, BACKUP_LIBS_DIR))
     Log.debug('copytree %s %s', path.join(proj_path, LIBS_DIR),
@@ -107,8 +108,8 @@ def genFileUpdate(new_file, old_file, dst_dir):
 
 def genUpdate(new_version_dir, old_version_dir, version):
     Log.debug('genUpdate: new_version_dir=%s, old_version_dir=%s', new_version_dir, old_version_dir)
-    new_dir = os.path.join(proj_path, INCUPDATE_DATA_DIR, new_version_dir)
-    old_dir = os.path.join(proj_path, INCUPDATE_DATA_DIR, old_version_dir)
+    new_dir = os.path.join(proj_path, env.INCUPDATE_DATA_DIR, new_version_dir)
+    old_dir = os.path.join(proj_path, env.INCUPDATE_DATA_DIR, old_version_dir)
     new_res_dir = os.path.join(new_dir, BACKUP_DIR, BACKUP_RES_DIR)
     new_libs_dir = os.path.join(new_dir, BACKUP_DIR, BACKUP_LIBS_DIR)
     old_res_dir = os.path.join(old_dir, BACKUP_DIR, BACKUP_RES_DIR)
@@ -177,9 +178,9 @@ def genUpdate(new_version_dir, old_version_dir, version):
 
 
 def genUpdates(new_version_dir, version):
-    dirs = os.listdir(os.path.join(proj_path, INCUPDATE_DATA_DIR))
+    dirs = os.listdir(os.path.join(proj_path, env.INCUPDATE_DATA_DIR))
     old_version_dirs = [d for d in dirs \
-        if os.path.isdir(os.path.join(proj_path, INCUPDATE_DATA_DIR, d)) \
+        if os.path.isdir(os.path.join(proj_path, env.INCUPDATE_DATA_DIR, d)) \
             and isbackupdir(d)]
     Log.info('found old versions: %s', old_version_dirs)
     for old_version_dir in old_version_dirs:
@@ -197,6 +198,10 @@ if __name__ == '__main__':
         help()
         sys.exit(1)
     proj_path = sys.argv[1]
+    package_name = getPackageName(proj_path)
+    env.INCUPDATE_DATA_DIR = os.path.join(env.INCUPDATE_DATA_DIR, package_name)
+    if not os.path.isdir(os.path.join(proj_path, env.INCUPDATE_DATA_DIR)):
+        os.makedirs(os.path.join(proj_path, env.INCUPDATE_DATA_DIR))
     parse_limit(sys.argv[2:])
     import update_client_res_version
     version, files, file_versions = update_client_res_version.genIncUpdateConfFile(proj_path)
@@ -205,7 +210,7 @@ if __name__ == '__main__':
     dirname = backup(version)
     genUpdates(dirname, version)
     update_limit(proj_path, version, sys.argv[2:])
-    print 'target_dir:', os.path.join(proj_path, INCUPDATE_DATA_DIR, dirname)
+    print 'target_dir:', os.path.join(proj_path, env.INCUPDATE_DATA_DIR, dirname)
 
 
 
