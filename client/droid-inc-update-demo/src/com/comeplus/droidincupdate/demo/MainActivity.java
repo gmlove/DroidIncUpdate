@@ -154,6 +154,18 @@ public class MainActivity extends Activity
                     Log.e("demo", "json parse error when duAssetsDir: ", e);
                 } catch (NotSupportedVersionException e) {
                     Log.e("demo", "not supported version to update: ", e);
+                    libPath = Config.getIncUpdateLibFilePath("lib1.so");
+                    int loadStatus =  MainActivity.this.load(libPath);
+                    if(loadStatus != 0) {
+                        Log.e("demo", "load lib failed: libpath=" + libPath + ", code=" + loadStatus);
+                    } else {
+                        MainActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MainActivity.this.callNative(libPath);
+                            }
+                        });
+                    }
                 }
 				
 			}

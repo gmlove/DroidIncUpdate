@@ -22,7 +22,16 @@ router.get('/update', function (req, res) {
     var incUpdateVersions = [];
     var newestVersion = null;
     var appIncupdateDataDir = path.join(config.incupdateDataDir, pn);
-    Promise.denodeify(fs.readdir)(appIncupdateDataDir).then(function (files) {
+    promiseUtil.fs_exists(appIncupdateDataDir).then(function(exists){
+        if(!exists) {
+            return Promise.resolve(false);
+        } else {
+            return Promise.denodeify(fs.readdir)(appIncupdateDataDir);
+        }
+    }).then(function (files) {
+        if(!files) {
+            return Promise.resolve(false);
+        }
         files.forEach(function (dirname) {
             if(IncUpdateVersion.isIncUpdateVersion(dirname)){
                 incUpdateVersions.push(new IncUpdateVersion(dirname, pn));

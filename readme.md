@@ -48,7 +48,7 @@ android.library.reference.1=relative/path/to/droid-inc-update
 │   │   ├── libdemo.so                 // your compiled `.so` file
 │   └── res                            // root directory of all of your resource files need to be updated
 
-4. Use `client/tools/zip_update.py` to generate a version of all your resource files and `.so` files.
+4. Use `client/tools/zip_update.py` to generate a version of all your resource files and `.so` files. You may need to change the `INCUPDATE_DATA_DIR` setting in the `client/tools/env.py` file.
 
 5. Build your project into an apk. This apk actually supports incremental updating now.
 

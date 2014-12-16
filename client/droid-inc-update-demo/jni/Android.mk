@@ -25,7 +25,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := lib1
 LOCAL_SRC_FILES := lib.c
-
+#LOCAL_CFLAGS += -g
 include $(BUILD_SHARED_LIBRARY)
 
 
