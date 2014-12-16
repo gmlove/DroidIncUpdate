@@ -19,6 +19,7 @@ Thanks to bsdiff and bspatch tools, we can use bsdiff to generate the changes be
 
 ## Source code
 
+```
 ├── client                             // all source code needed by client
 │   ├── droid-inc-update               // lib android project that app must integrate
 │   ├── droid-inc-update-demo          // a simple demo
@@ -30,6 +31,7 @@ Thanks to bsdiff and bspatch tools, we can use bsdiff to generate the changes be
     ├── deploy.sh                      // deploy script
     ├── npm-install.sh                 // npm install script
     └── src                            // server source code written in nodejs
+```
 
 ## Usage
 
@@ -42,11 +44,12 @@ android.library.reference.1=relative/path/to/droid-inc-update
  With `dlopen` `dlsym` `dlclose` API, this mechanism will be achieved. Refer `client/droid-inc-update-demo/jni/loader.c` to implement your loader.
 
 3. Build your native code into `.so` file, and move `.so` file into a directory in assets. Make directory tree like below.
-
+```
 ├── assets
 │   ├── incupdatelibs                  // directory to store your `.so` files which need to be updated
 │   │   ├── libdemo.so                 // your compiled `.so` file
 │   └── res                            // root directory of all of your resource files need to be updated
+```
 
 4. Use `client/tools/zip_update.py` to generate a version of all your resource files and `.so` files. You may need to change the `INCUPDATE_DATA_DIR` setting in the `client/tools/env.py` file.
 

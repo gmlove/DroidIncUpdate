@@ -1,6 +1,9 @@
 .DS_Store
 **/.DS_Store
 **/*.pyc
+makefile
+comeplus.git
+github.git
 server/src/node_modules
 server/src/logs
 client/tmp
