@@ -4,6 +4,8 @@
 makefile
 server/deploy.sh
 server/deploy.sh.bak
+server/config/
+server/config.bak/
 comeplus.git
 github.git
 server/src/node_modules
