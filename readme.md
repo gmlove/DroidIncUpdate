@@ -36,6 +36,7 @@ Thanks to bsdiff and bspatch tools, we can use bsdiff to generate the changes be
 ## Usage
 
 1. Add project reference to your project.properties in your android project directory.
+
 ```
 android.library.reference.1=relative/path/to/droid-inc-update
 ```
@@ -44,6 +45,7 @@ android.library.reference.1=relative/path/to/droid-inc-update
  With `dlopen` `dlsym` `dlclose` API, this mechanism will be achieved. Refer `client/droid-inc-update-demo/jni/loader.c` to implement your loader.
 
 3. Build your native code into `.so` file, and move `.so` file into a directory in assets. Make directory tree like below.
+
 ```
 ├── assets
 │   ├── incupdatelibs                  // directory to store your `.so` files which need to be updated
