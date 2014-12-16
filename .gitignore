@@ -2,6 +2,8 @@
 **/.DS_Store
 **/*.pyc
 makefile
+server/deploy.sh
+server/deploy.sh.bak
 comeplus.git
 github.git
 server/src/node_modules
