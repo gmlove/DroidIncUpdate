@@ -8,6 +8,7 @@ With the incremental updating feature, your users only need to download the chan
 
 But, there are also some limitations for incremental updating:
 * Only the native code can be updated.
+* Must have an updating process every time the app starts.
 
 These features are urgently needed especially by games developed in c++.
 
