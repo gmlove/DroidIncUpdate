@@ -26,12 +26,23 @@ Thanks to bsdiff and bspatch tools, we can use bsdiff to generate the changes be
 │   ├── droid-inc-update-demo-cocos    // a cocos2dx demo with incremental updating functionality
 │   ├── incupdatedata                  // directory to save the generated updating files
 │   └── tools                          // tools needed to generate updating files
+│       ├── binding_gen.py             // tool to generate cocos2dx binding code
+│       ├── env.py                     // settings used across all the tools
+│       ├── update_client_res_version.py         // tool to update version of client resources
+│       ├── update_limit.py            // tool to update updating limit of a new version
+│       ├── zip_update.py              // tool to generate a new incupdate version of your app.
 └── server
     ├── config                         // config files
     ├── deploy.sh                      // deploy script
     ├── npm-install.sh                 // npm install script
     └── src                            // server source code written in nodejs
 ```
+
+## The updating process
+
+* `zip_update.py` tool scans all of your resources in the `assets/incupdatelibs` and `assets/res` directories to generate a version of the resources, then save some information to file `assets/files.conf` and `assets/incupdate.conf` in JSON format. The version actually is a new release version. The tool also backup the resources and generate a `update.zip` file for all older versions. The `update.zip` file contains everything needed to update from an old version to the new version.
+* `update_limit.py` tool update the `updatelimit.json` file in the `incupdatedata` directory, which contains updating limit settings of the version, like only app running in Android 5.0 can be updated. The server will read the `updateLimit.json` file to delivery the new version correctly.
+* When user opens an older version app, app updating starts automatically. The running app will send an HTTP request to the updating server with some information of the android device and the version of the running app which was read from file `assets/files.conf` or `assets/incupdate.conf`. Then the server checks the version and other device information to determine if the client need updating. If needs, the server will send the `update.zip` to the app, and the app will complete the updating process with the data contains in `update.zip` file.
 
 ## Usage
 
