@@ -47,7 +47,7 @@ def genFileMD5(files):
         if(os.path.isdir(files)):
             return hashlib.md5(files).hexdigest()
         else:
-            f = file(files)
+            f = file(files, 'rb')
             md5 = hashlib.md5(f.read()).hexdigest()
             f.close()
             return md5
@@ -57,7 +57,7 @@ def genFileMD5(files):
         if(os.path.isdir(filePath)):
             result.append(hashlib.md5(filePath).hexdigest())
         else:
-            f = file(filePath)
+            f = file(filePath, 'rb')
             result.append(hashlib.md5(f.read()).hexdigest())
             f.close()
     return result
