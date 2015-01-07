@@ -44,7 +44,7 @@ public class Config {
      * @throws JSONException should not happen, or client tools must have bugs
      */
     public static void init(Context context) throws IOException, JSONException {
-        INCUPDATE_PARENT_DIR = context.getDir("", Context.MODE_PRIVATE).getCanonicalPath();
+        INCUPDATE_PARENT_DIR = context.getFilesDir().getAbsolutePath();
         // read assetUpdateInfo
         String assetUpdateInfoRaw = null;
         InputStream is = null;

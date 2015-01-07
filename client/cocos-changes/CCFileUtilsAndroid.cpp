@@ -132,6 +132,10 @@ bool CCFileUtilsAndroid::isFileExist(const std::string& strFilePath)
             strPath.insert(0, m_strDefaultResRootPath);
         }
 
+        if (!s_pZipFile) 
+        {
+            return false;
+        }
         if (s_pZipFile->fileExists(strPath))
         {
             bFound = true;
@@ -187,7 +191,11 @@ unsigned char* CCFileUtilsAndroid::doGetFileData(const char* pszFileName, const 
     
     if (fullPath[0] != '/')
     {
-
+	    if (!s_pZipFile) 
+        {
+            return 0;
+        }
+		
         // changed to add incupdate functionality
         CCAssert(s_useAssets, "CCFileUtilsAndroid: must s_useAssets when fullPath is relative.");
         // changed to add incupdate functionality
