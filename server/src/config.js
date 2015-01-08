@@ -35,7 +35,11 @@ exp.logger = {
 
 }
 
-exp.incupdateDataDir = path.join(__dirname, '../../client/incupdatedata')
+if(process.env.droid_inc_update_env == 'server') {
+    exp.incupdateDataDir = path.join(__dirname, '../incupdatedata');
+} else {
+    exp.incupdateDataDir = path.join(__dirname, '../../client/incupdatedata');
+}
 exp.diffDir = 'incupdate';
 exp.updateFileName = 'update.zip';
 exp.updateLimitFileName = 'updatelimit.json';

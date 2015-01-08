@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.provider.Settings;
 
 public class SystemInfo {
 
@@ -25,9 +26,9 @@ public class SystemInfo {
         sb.append("&tz=");
         sb.append(URLEncoder.encode(TimeZone.getDefault().getID()));
         // READ_PHONE_STATE
-        final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String androidId = Settings.Secure.getString(context.getContentResolver(),Settings.Secure.ANDROID_ID);
         sb.append("&did=");
-        sb.append(URLEncoder.encode(MD5.caclStringMd5(tm.getDeviceId())));
+        sb.append(URLEncoder.encode(MD5.caclStringMd5(androidId)));
         sb.append("&m=");
         sb.append(URLEncoder.encode(android.os.Build.MODEL));
         sb.append("&vr=");
